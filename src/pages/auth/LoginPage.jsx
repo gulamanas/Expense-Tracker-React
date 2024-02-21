@@ -1,7 +1,7 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/app';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -66,9 +66,9 @@ const LoginPage = () => {
         </div>
         <p className='mt-6'>
           Don&apos;t have an Account?
-          <a href='/signup' className='text-blue-600 ml-2'>
+          <Link to='/signup' className='text-blue-600 ml-2'>
             Sign Up
-          </a>
+          </Link>
         </p>
       </form>
     </div>

@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { auth } from '../../firebase/app';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -68,9 +68,9 @@ const SignUpPage = () => {
         </div>
         <p className='mt-6'>
           Already Registerd?
-          <a href='/login' className='text-blue-600 ml-2'>
+          <Link to='/login' className='text-blue-600 ml-2'>
             Log In
-          </a>
+          </Link>
         </p>
       </form>
     </div>
