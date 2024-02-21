@@ -1,10 +1,12 @@
 // import GetData from '../../components/GetData';
 import { useAddTransaction } from '../../hooks/useAddTransaction';
+import { useGetTransactions } from '../../hooks/useGetTransactions';
 import Header from '../../components/header/Header';
 import { useState } from 'react';
 
 const HomePage = () => {
   const { addTransaction } = useAddTransaction();
+  const { transactions } = useGetTransactions();
 
   const [description, setDescription] = useState('');
   const [transactionAmount, setTransactionAmount] = useState(0);
@@ -75,6 +77,19 @@ const HomePage = () => {
             <button type='submit'>Add Transaction</button>
           </form>
         </div>
+      </div>
+      <div className='transactions'>
+        <ul>
+          {transactions.map((transaction) => {
+            return (
+              <li key={transaction.id}>
+                <h4>{transaction.description}</h4>
+                <h4>{transaction.transactionAmount}</h4>
+                <h4>{transaction.transactionType}</h4>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </>
   );

@@ -27,26 +27,51 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <h2>Login</h2>
-      <label htmlFor='email'>Email ID</label>
-      <input
-        type='email'
-        id='email'
-        name='email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <label htmlFor='password'>Password</label>
-      <input
-        type='password'
-        id='password'
-        name='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type='submit'>Submit</button>
-    </form>
+    <div className='flex justify-center items-center h-screen'>
+      <form onSubmit={submitHandler} className=''>
+        <h2 className='text-3xl font-semibold uppercase text-center mb-4'>
+          Log in
+        </h2>
+        <div className='flex flex-col gap-2 items-center'>
+          <label htmlFor='email' className='self-start font-semibold '>
+            Email ID
+          </label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            value={email}
+            className='border border-gray-400 p-2 rounded outline-none w-full'
+            placeholder='test@email.com'
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label htmlFor='password' className='self-start font-semibold '>
+            Password
+          </label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            value={password}
+            className='border border-gray-400 p-2 rounded outline-none w-full'
+            placeholder='123456'
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type='submit'
+            className='border border-gray-700 bg-gray-700 text-white px-4 py-2 rounded hover:bg-transparent hover:text-gray-700 font-medium'
+          >
+            Log In
+          </button>
+        </div>
+        <p className='mt-6'>
+          Don&apos;t have an Account?
+          <a href='/signup' className='text-blue-600 ml-2'>
+            Sign Up
+          </a>
+        </p>
+      </form>
+    </div>
   );
 };
 
