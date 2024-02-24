@@ -17,7 +17,7 @@ const LoginPage = () => {
         password
       );
       const user = userCredentials.user;
-      console.log(user.accessToken);
+      // console.log(user.accessToken);
       localStorage.setItem('token', user.accessToken);
       localStorage.setItem('user', JSON.stringify(user));
       navigate('/');
@@ -32,7 +32,7 @@ const LoginPage = () => {
         <h2 className='text-3xl font-semibold uppercase text-center mb-4'>
           Log in
         </h2>
-        <div className='flex flex-col gap-2 items-center'>
+        <div className='flex flex-col gap-2 items-center sm:w-80 w-72'>
           <label htmlFor='email' className='self-start font-semibold '>
             Email ID
           </label>
