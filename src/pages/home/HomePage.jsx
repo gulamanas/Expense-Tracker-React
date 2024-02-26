@@ -11,7 +11,7 @@ const HomePage = () => {
       <div className='flex justify-between p-5 gap-5'>
         <div className='flex-1 flex flex-col'>
           <Categories />
-          <div className='mt-5 flex-1 overflow-y-auto max-h-[78vh]'>
+          <div className='mt-5 flex-1 overflow-y-auto max-h-[75vh]'>
             <TransactionList />
           </div>
         </div>

@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <div className='flex justify-between  bg-green-500'>
+    <div className='flex justify-between  bg-white p-4 '>
       <h2>Welcome {userEmail}</h2>
       {/* <input type='search' name='' id='' /> */}
       <div className='image relative'>
