@@ -1,8 +1,11 @@
-// import GetData from '../../components/GetData';
+import { useState } from 'react';
 import { useAddTransaction } from '../../hooks/useAddTransaction';
 import { useGetTransactions } from '../../hooks/useGetTransactions';
 import Header from '../../components/header/Header';
-import { useState } from 'react';
+import Profile from '../../components/dashboard/Profile';
+import Categories from '../../components/dashboard/Categories';
+import TransactionList from '../../components/dashboard/TransactionList';
+import AddTransactionComponent from '../../components/dashboard/AddTransactionComponent';
 
 const HomePage = () => {
   const { addTransaction } = useAddTransaction();
@@ -24,11 +27,24 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      {/* <GetData /> */}
+      <div className='flex justify-between p-5 gap-5'>
+        <div className='flex-1 flex flex-col'>
+          <Categories />
+          <div className='mt-5 flex-1'>
+            <TransactionList />
+          </div>
+        </div>
+        <div className='flex flex-col gap-5'>
+          <Profile />
+          <div className='graph w-full h-40 bg-red-300'></div>
+          <div className='graph w-full h-40 bg-red-300'></div>
+          <AddTransactionComponent />
+        </div>
+      </div>
 
-      <div className='expense-tracker'>
-        <div className='container'>
-          <h1>Expense Tracker</h1>
+      {/* <div className='expense-tracker'>
+        <div className='container'> */}
+      {/* <h1>Expense Tracker</h1>
           <div className='balance'>
             <h3>Your Balance</h3>
             <h2>$0.0</h2>
@@ -42,8 +58,8 @@ const HomePage = () => {
               <h3>Expenses</h3>
               <h2>$0.0</h2>
             </div>
-          </div>
-          <form className='add-transaction' onSubmit={onSubmitHandler}>
+          </div> */}
+      {/* <form className='add-transaction' onSubmit={onSubmitHandler}>
             <input
               type='text'
               placeholder='Description'
@@ -75,10 +91,10 @@ const HomePage = () => {
             />
             <label htmlFor='income'> Income</label>
             <button type='submit'>Add Transaction</button>
-          </form>
-        </div>
-      </div>
-      <div className='transactions'>
+          </form> */}
+      {/* </div>
+      </div> */}
+      {/* <div className='transactions'>
         <ul>
           {transactions.map((transaction) => {
             return (
@@ -90,7 +106,7 @@ const HomePage = () => {
             );
           })}
         </ul>
-      </div>
+      </div> */}
     </>
   );
 };
