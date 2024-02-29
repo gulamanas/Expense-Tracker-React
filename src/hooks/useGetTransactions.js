@@ -11,6 +11,7 @@ import { db } from '../firebase/app';
 export const useGetTransactions = () => {
   const userId = JSON.parse(localStorage.getItem('user')).uid;
   const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const transactionCollectionRef = collection(db, 'transactions');
 
@@ -33,9 +34,11 @@ export const useGetTransactions = () => {
           docs.push({ ...data, id });
         });
         setTransactions(docs);
+        setLoading(false);
       });
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
 
     return () => unsubscribe();
@@ -45,5 +48,5 @@ export const useGetTransactions = () => {
     getTransactions();
   }, []);
 
-  return { transactions };
+  return { transactions, loading };
 };
