@@ -10,17 +10,19 @@ export const getWeeklyData = (transactions) => {
   };
 
   transactions.forEach((transaction) => {
-    const dayOfWeek = new Date(
-      transaction.createdAt.toDate()
-    ).toLocaleDateString('en-US', { weekday: 'short' });
-    if (transaction.transactionType === 'expense') {
-      weeklyTransactions[dayOfWeek].expenses += Number(
-        transaction.transactionAmount
-      );
-    } else if (transaction.transactionType === 'income') {
-      weeklyTransactions[dayOfWeek].income += Number(
-        transaction.transactionAmount
-      );
+    if (transaction.createdAt) {
+      const dayOfWeek = new Date(
+        transaction.createdAt.toDate()
+      ).toLocaleDateString('en-US', { weekday: 'short' });
+      if (transaction.transactionType === 'expense') {
+        weeklyTransactions[dayOfWeek].expenses += Number(
+          transaction.transactionAmount
+        );
+      } else if (transaction.transactionType === 'income') {
+        weeklyTransactions[dayOfWeek].income += Number(
+          transaction.transactionAmount
+        );
+      }
     }
   });
 

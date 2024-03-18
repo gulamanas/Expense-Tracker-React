@@ -4,14 +4,17 @@ import { useGetTransactions } from '../../hooks/useGetTransactions';
 const TransactionList = () => {
   const { transactions, loading } = useGetTransactions();
   const [isLoading, setIsLoading] = useState(true);
+  console.log({ transactions });
 
   useEffect(() => {
     setIsLoading(loading);
   }, [loading]);
 
   return (
-    <div>
-      <h3 className='font-semibold text-3xl'>Transactions</h3>
+    <div className=''>
+      <h3 className='font-semibold text-3xl sticky top-0 bg-white inline-block w-full'>
+        Transactions
+      </h3>
       {isLoading ? (
         <div className='text-center flex justify-center h-[50vh] items-center'>
           <div className='flex items-center justify-center h-screen'>

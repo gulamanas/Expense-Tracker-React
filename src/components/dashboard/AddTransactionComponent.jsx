@@ -2,15 +2,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faMultiply } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useAddTransaction } from '../../hooks/useAddTransaction';
+import { useGetCategories } from '../../hooks/useGetCategories';
+import FormDropdown from './FormDropdown';
 
 const AddTransactionComponent = () => {
   const { addTransaction } = useAddTransaction();
+  const { categories } = useGetCategories();
+
+  console.log({ categories });
 
   const [openForm, setOpenForm] = useState(false);
 
   const [description, setDescription] = useState('');
   const [transactionAmount, setTransactionAmount] = useState(0);
   const [transactionType, setTransactionType] = useState('expense');
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [selectedCategoryValue, setSelectedCategoryValue] = useState('');
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -19,10 +27,12 @@ const AddTransactionComponent = () => {
         description,
         transactionAmount,
         transactionType,
+        categoryId: selectedCategoryId,
       });
       closeModal();
     } catch (error) {
       alert(error.message);
+      console.error(error);
     }
   };
 
@@ -32,6 +42,11 @@ const AddTransactionComponent = () => {
 
   const closeModal = () => {
     setOpenForm(false);
+  };
+
+  const handleDropdownChange = (id, value) => {
+    setSelectedCategoryId(id);
+    setSelectedCategoryValue(value);
   };
 
   return (
@@ -45,7 +60,7 @@ const AddTransactionComponent = () => {
       {openForm && (
         <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50'>
           <div className='bg-white rounded-lg'>
-            <div className='flex justify-between items-center bg-blue-400 p-4 rounded-t-lg'>
+            <div className='flex justify-between items-center bg-blue-400 p-4 rounded-t-lg w-[400px]'>
               <h3 className='font-semibold text-lg text-white'>
                 Add Transaction
               </h3>
@@ -95,6 +110,14 @@ const AddTransactionComponent = () => {
                   onChange={(e) => setTransactionType(e.target.value)}
                 />
                 <label htmlFor='income'> Income</label>
+              </div>
+              <div>
+                <FormDropdown
+                  categories={categories}
+                  onChange={handleDropdownChange}
+                />
+                <p>Selected ID: {selectedCategoryId}</p>
+                <p>Selected Value: {selectedCategoryValue}</p>
               </div>
               <button
                 type='submit'
