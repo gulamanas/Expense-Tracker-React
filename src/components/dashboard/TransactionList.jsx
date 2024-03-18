@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGetTransactions } from '../../hooks/useGetTransactions';
+import { addCommas } from '../../utils/addCommas';
 
 const TransactionList = () => {
   const { transactions, loading } = useGetTransactions();
@@ -55,7 +56,7 @@ const TransactionList = () => {
                     <p className='text-[14px]'>{formattedDate}</p>
                   </div>
                   <div className=''>
-                    <p>{`₹${transactionAmount}`}</p>
+                    <p>{`₹${addCommas(transactionAmount)}`}</p>
                     <p
                       className={
                         transactionType === 'expense'

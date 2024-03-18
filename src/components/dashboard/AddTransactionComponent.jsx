@@ -116,8 +116,6 @@ const AddTransactionComponent = () => {
                   categories={categories}
                   onChange={handleDropdownChange}
                 />
-                <p>Selected ID: {selectedCategoryId}</p>
-                <p>Selected Value: {selectedCategoryValue}</p>
               </div>
               <button
                 type='submit'
