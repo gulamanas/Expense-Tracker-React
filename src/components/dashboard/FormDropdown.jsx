@@ -14,7 +14,7 @@ const FormDropdown = ({ categories, onChange }) => {
 
   return (
     <>
-      <label for='cars'>Choose a category:</label>
+      <label>Choose a category:</label>
       <select
         onChange={handleSelectChange}
         value={selectedOption}

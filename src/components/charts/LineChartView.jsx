@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
-import { useGetTransactions } from '../hooks/useGetTransactions';
-import { getWeeklyData } from '../utils/getWeeklyData';
+import { useGetTransactions } from '../../hooks/useGetTransactions';
+import { getWeeklyData } from '../../utils/getWeeklyData';
 
-const LIneChartView = () => {
+const LineChartView = () => {
   const { transactions, loading } = useGetTransactions();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,4 +41,4 @@ const LIneChartView = () => {
   return <Line data={data} />;
 };
 
-export default LIneChartView;
+export default LineChartView;

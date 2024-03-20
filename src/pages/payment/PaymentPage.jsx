@@ -1,7 +1,12 @@
-import LIneChartView from '../../components/LIneChartView';
+import React from 'react';
+import LineChartView from '../../components/charts/LineChartView';
 
 const PaymentPage = () => {
-  return <LIneChartView />;
+  return (
+    <div>
+      <LineChartView />
+    </div>
+  );
 };
 
 export default PaymentPage;

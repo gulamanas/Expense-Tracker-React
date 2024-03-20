@@ -3,7 +3,7 @@ import Profile from '../../components/dashboard/Profile';
 import Categories from '../../components/dashboard/Categories';
 import TransactionList from '../../components/dashboard/TransactionList';
 import AddTransactionComponent from '../../components/dashboard/AddTransactionComponent';
-import LIneChartView from '../../components/LIneChartView';
+import LineChartView from '../../components/charts/LineChartView';
 
 const HomePage = () => {
   return (
@@ -19,7 +19,7 @@ const HomePage = () => {
         <div className='flex flex-col gap-5'>
           <Profile />
           <div className='graph w-[300px] h-40 bg-white border border-red-400 rounded-lg p-2'>
-            <LIneChartView />
+            <LineChartView />
           </div>
           <div className='graph w-full h-40 bg-red-300'></div>
           <AddTransactionComponent />

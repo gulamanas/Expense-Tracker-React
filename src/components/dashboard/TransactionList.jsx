@@ -1,10 +1,29 @@
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useGetTransactions } from '../../hooks/useGetTransactions';
+import { useUpdateTransaction } from '../../hooks/useUpdateTransaction';
+import { useGetCategories } from '../../hooks/useGetCategories';
 import { addCommas } from '../../utils/addCommas';
+import TransactionFormModal from './TransactionFormModal';
 
 const TransactionList = () => {
   const { transactions, loading } = useGetTransactions();
+  const { categories } = useGetCategories();
+  const { updateTransaction } = useUpdateTransaction();
   const [isLoading, setIsLoading] = useState(true);
+  const [openForm, setOpenForm] = useState(false);
+  const [currentTransaction, setCurrentTransaction] = useState({});
+
+  const openModal = (transaction) => {
+    setOpenForm(true);
+    setCurrentTransaction(transaction);
+  };
+
+  const closeModal = () => {
+    setOpenForm(false);
+  };
+
   console.log({ transactions });
 
   useEffect(() => {
@@ -13,7 +32,7 @@ const TransactionList = () => {
 
   return (
     <div className=''>
-      <h3 className='font-semibold text-3xl sticky top-0 bg-white inline-block w-full'>
+      <h3 className='z-10 font-semibold text-3xl sticky top-0 bg-white inline-block w-full'>
         Transactions
       </h3>
       {isLoading ? (
@@ -25,7 +44,7 @@ const TransactionList = () => {
       ) : (
         <div className='p-2 grid gap-3'>
           {transactions &&
-            transactions.map((transaction) => {
+            transactions.map((transaction, index) => {
               const {
                 id,
                 description,
@@ -47,7 +66,7 @@ const TransactionList = () => {
               return (
                 <div
                   key={id}
-                  className='flex justify-between bg-white py-1 px-3 rounded shadow'
+                  className='flex justify-between bg-white py-1 px-3 rounded shadow relative'
                 >
                   <div className=''>
                     <h4 className='font-semibold text-[20px] capitalize'>
@@ -55,21 +74,43 @@ const TransactionList = () => {
                     </h4>
                     <p className='text-[14px]'>{formattedDate}</p>
                   </div>
-                  <div className=''>
-                    <p>{`₹${addCommas(transactionAmount)}`}</p>
-                    <p
-                      className={
-                        transactionType === 'expense'
-                          ? 'text-red-500'
-                          : 'text-green-500'
-                      }
-                    >
-                      {transactionType}
-                    </p>
+                  <div className='flex items-center gap-5'>
+                    <span className=''>
+                      <p>{`₹${addCommas(transactionAmount)}`}</p>
+                      <p
+                        className={
+                          transactionType === 'expense'
+                            ? 'text-red-500'
+                            : 'text-green-500'
+                        }
+                      >
+                        {transactionType}
+                      </p>
+                    </span>
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        className='cursor-pointer text-blue-800'
+                        onClick={() => openModal(transaction)}
+                      />
+                    </span>
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className='cursor-pointer text-red-600'
+                      />
+                    </span>
                   </div>
                 </div>
               );
             })}
+          <TransactionFormModal
+            isOpen={openForm}
+            onClose={closeModal}
+            categories={categories}
+            onSubmit={updateTransaction}
+            itemTransaction={currentTransaction}
+          />
         </div>
       )}
     </div>
