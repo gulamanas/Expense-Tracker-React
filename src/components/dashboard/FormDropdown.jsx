@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const FormDropdown = ({ categories, onChange }) => {
+const FormDropdown = ({ categories, onChange, categoryId }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleSelectChange = (e) => {
@@ -11,6 +11,10 @@ const FormDropdown = ({ categories, onChange }) => {
     setSelectedOption(selectedId);
     onChange(selectedId, selectedValue);
   };
+
+  useEffect(() => {
+    setSelectedOption(categoryId ?? '');
+  }, [categoryId]);
 
   return (
     <>

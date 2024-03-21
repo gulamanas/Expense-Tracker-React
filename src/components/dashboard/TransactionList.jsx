@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useGetTransactions } from '../../hooks/useGetTransactions';
 import { useUpdateTransaction } from '../../hooks/useUpdateTransaction';
+import { useDeleteTransaction } from '../../hooks/useDeleteTransaction';
 import { useGetCategories } from '../../hooks/useGetCategories';
 import { addCommas } from '../../utils/addCommas';
 import TransactionFormModal from './TransactionFormModal';
@@ -11,6 +12,7 @@ const TransactionList = () => {
   const { transactions, loading } = useGetTransactions();
   const { categories } = useGetCategories();
   const { updateTransaction } = useUpdateTransaction();
+  const { deleteTransaction } = useDeleteTransaction();
   const [isLoading, setIsLoading] = useState(true);
   const [openForm, setOpenForm] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState({});
@@ -23,8 +25,6 @@ const TransactionList = () => {
   const closeModal = () => {
     setOpenForm(false);
   };
-
-  console.log({ transactions });
 
   useEffect(() => {
     setIsLoading(loading);
@@ -52,6 +52,11 @@ const TransactionList = () => {
                 transactionType,
                 createdAt,
               } = transaction;
+              console.log(
+                'amount',
+                transactionAmount,
+                typeof transactionAmount
+              );
               const formattedDate = createdAt
                 ? createdAt.toDate().toLocaleDateString('en-US', {
                     day: 'numeric',
@@ -98,6 +103,7 @@ const TransactionList = () => {
                       <FontAwesomeIcon
                         icon={faTrash}
                         className='cursor-pointer text-red-600'
+                        onClick={() => deleteTransaction(id)}
                       />
                     </span>
                   </div>

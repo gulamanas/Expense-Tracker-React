@@ -1,9 +1,4 @@
-import {
-  updateDoc,
-  collection,
-  doc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { updateDoc, collection, doc } from 'firebase/firestore';
 import { db } from '../firebase/app';
 
 export const useUpdateTransaction = () => {
@@ -13,7 +8,7 @@ export const useUpdateTransaction = () => {
 
   const updateTransaction = async (
     transactionId,
-    { description, transactionAmount, transactionType, categoryId }
+    { description, transactionAmount, transactionType, categoryId, createdAt }
   ) => {
     const transactionRef = doc(transactionCollectionRef, transactionId);
     const categoryRef = doc(categoriesCollectionRef, categoryId);
@@ -23,7 +18,7 @@ export const useUpdateTransaction = () => {
       transactionAmount,
       transactionType,
       categoryRef,
-      createdAt: serverTimestamp(),
+      createdAt,
     });
   };
 

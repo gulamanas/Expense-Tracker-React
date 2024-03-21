@@ -15,8 +15,7 @@ const TransactionFormModal = ({
   const [transactionType, setTransactionType] = useState('expense');
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [selectedCategoryValue, setSelectedCategoryValue] = useState('');
-
-  console.log(itemTransaction);
+  const [createdAt, setCreatedAt] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +26,7 @@ const TransactionFormModal = ({
           transactionAmount,
           transactionType,
           categoryId: selectedCategoryId,
+          createdAt,
         });
       } else {
         onSubmit({
@@ -50,13 +50,15 @@ const TransactionFormModal = ({
 
   useEffect(() => {
     if (itemTransaction) {
+      let newAmount = Number(itemTransaction.transactionAmount ?? 0);
       setDescription(itemTransaction.description);
-      setTransactionAmount(itemTransaction.transactionAmount);
+      setTransactionAmount(newAmount);
       setTransactionType(itemTransaction.transactionType);
       setSelectedCategoryId(
         itemTransaction.categoryRef ? itemTransaction.categoryRef.id : ''
       );
       setSelectedCategoryValue(itemTransaction.id);
+      setCreatedAt(itemTransaction.createdAt ?? '');
     }
   }, [itemTransaction]);
 
@@ -122,6 +124,7 @@ const TransactionFormModal = ({
               <FormDropdown
                 categories={categories}
                 onChange={handleDropdownChange}
+                categoryId={selectedCategoryId}
               />
             </div>
             <button
