@@ -21,7 +21,7 @@ const AddTransactionComponent = () => {
   return (
     <>
       <button
-        className='bg-[#FC7C7B] p-6 rounded-lg font-semibold text-white'
+        className='bg-[#FC7C7B] p-6 rounded-full font-semibold text-white fixed bottom-10 right-10'
         onClick={openModal}
       >
         <FontAwesomeIcon icon={faAdd} /> Add Transaction

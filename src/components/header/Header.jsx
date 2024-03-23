@@ -9,6 +9,7 @@ const Header = () => {
 
   const user = localStorage.getItem('user');
   const userEmail = JSON.parse(user).email;
+  const displayName = JSON.parse(user).displayName;
 
   const navigate = useNavigate();
 
@@ -25,7 +26,9 @@ const Header = () => {
 
   return (
     <div className='flex justify-between  bg-white p-4 '>
-      <h2>Welcome {userEmail}</h2>
+      <h2>
+        Welcome <span className='font-bold '>{displayName ?? userEmail}</span>
+      </h2>
       {/* <input type='search' name='' id='' /> */}
       <div className='image relative'>
         <img

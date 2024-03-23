@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useState } from 'react';
 import { auth } from '../../firebase/app';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,11 +8,13 @@ import {
   faUser,
   faEye,
   faEyeSlash,
+  faPerson,
 } from '@fortawesome/free-solid-svg-icons';
 
 import expensoLogo from '../../assets/expenso-logo.png';
 
 const SignUpPage = () => {
+  const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -37,7 +39,13 @@ const SignUpPage = () => {
         email,
         password
       );
+
       const user = userCredentials.user;
+      await updateProfile(user, {
+        displayName,
+      });
+
+      console.log(user);
       localStorage.setItem('token', user.accessToken);
       localStorage.setItem('user', JSON.stringify(user));
       navigate('/');
@@ -82,6 +90,23 @@ const SignUpPage = () => {
             Sign Up
           </h2>
           <div className='flex flex-col gap-2 items-center sm:w-80 w-72'>
+            <label htmlFor='displayName' className='self-start font-semibold'>
+              Full Name
+            </label>
+            <div className='relative w-full'>
+              <input
+                type='text'
+                id='displayName'
+                name='displayName'
+                className='border border-gray-400 rounded outline-none w-full pl-10 pr-4 py-2'
+                value={displayName}
+                placeholder='Full Name'
+                onChange={(e) => setDisplayName(e.target.value)}
+              />
+              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                <FontAwesomeIcon icon={faPerson} />
+              </div>
+            </div>
             <label htmlFor='email' className='self-start font-semibold'>
               Email ID
             </label>

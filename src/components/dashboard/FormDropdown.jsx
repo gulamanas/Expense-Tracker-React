@@ -25,15 +25,18 @@ const FormDropdown = ({ categories, onChange, categoryId }) => {
         required
         className='px-3 py-4 bg-green-200 rounded-md ml-4 outline-none'
       >
-        <optgroup label='Category'>
-          {categories.map(({ id, title }) => {
-            return (
-              <option value={id} key={id}>
-                {title}
-              </option>
-            );
-          })}
-        </optgroup>
+        <option value='' disabled>
+          Select a category
+        </option>
+        {/* <optgroup label='Category'> */}
+        {categories.map(({ id, title }) => {
+          return (
+            <option value={id} key={id}>
+              {title}
+            </option>
+          );
+        })}
+        {/* </optgroup> */}
       </select>
     </>
   );

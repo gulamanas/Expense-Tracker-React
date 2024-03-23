@@ -31,7 +31,7 @@ const TransactionFormModal = ({
       } else {
         onSubmit({
           description,
-          transactionAmount,
+          transactionAmount: Number(transactionAmount),
           transactionType,
           categoryId: selectedCategoryId,
         });
