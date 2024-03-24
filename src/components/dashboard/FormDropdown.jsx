@@ -5,7 +5,7 @@ const FormDropdown = ({ categories, onChange, categoryId }) => {
 
   const handleSelectChange = (e) => {
     const selectedIndex = e.target.selectedIndex;
-    const selectedId = categories[selectedIndex].id;
+    const selectedId = categories[selectedIndex - 1].id;
     // const selectedValue = categories[selectedIndex].title;
     const selectedValue = e.target.value;
     setSelectedOption(selectedId);

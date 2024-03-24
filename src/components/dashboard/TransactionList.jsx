@@ -43,7 +43,7 @@ const TransactionList = () => {
 
   return (
     <>
-      <div className=''>
+      <div className='h-[500px] overflow-scroll overflow-x-hidden'>
         <h3 className='z-10 font-semibold text-3xl sticky top-0 bg-white inline-block w-full'>
           Transactions
         </h3>
@@ -67,11 +67,12 @@ const TransactionList = () => {
                       transactionType,
                       createdAt,
                     } = transaction;
-                    console.log(
-                      'amount',
-                      transactionAmount,
-                      typeof transactionAmount
+                    // console.log(transaction);
+                    // console.log(categories);
+                    const categoryTitle = categories.filter(
+                      (category) => category.id === transaction.categoryRef.id
                     );
+                    console.log({ categoryTitle });
                     const formattedDate = createdAt
                       ? createdAt.toDate().toLocaleDateString('en-US', {
                           day: 'numeric',
@@ -88,13 +89,16 @@ const TransactionList = () => {
                         key={id}
                         className='flex justify-between bg-white py-1 px-3 rounded shadow relative'
                       >
-                        <div className=''>
-                          <h4 className='font-semibold text-[20px] capitalize'>
-                            {description}
-                          </h4>
-                          <p className='text-[14px]'>{formattedDate}</p>
+                        <div className='flex'>
+                          <div className=''>
+                            <h4 className='font-semibold text-[20px] capitalize'>
+                              {description}
+                            </h4>
+                            <p className='text-[14px]'>{formattedDate}</p>
+                          </div>
                         </div>
                         <div className='flex items-center gap-5'>
+                          <span className='text-left w-32 text-gray-500 font-medium'>{`${categoryTitle[0].title}`}</span>
                           <span className=''>
                             <p>{`₹${addCommas(transactionAmount)}`}</p>
                             <p
@@ -137,7 +141,7 @@ const TransactionList = () => {
         )}
       </div>
       {transactions.length > 0 && (
-        <div className='bg-white py-3'>
+        <div className='bg-white py-3 mt-3'>
           <span
             className={`py-4 px-5 border border-gray-400 cursor-pointer ${
               page == 1 ? 'hidden' : 'inline'
