@@ -16,14 +16,17 @@ const HomePage = () => {
             <TransactionList />
           </div>
         </div>
-        <div className='flex flex-col gap-5'>
-          <Profile />
+        {/* <div className='flex flex-col gap-5'> */}
+        {/* <Profile />
           <div className='graph w-[300px] h-40 bg-white border border-red-400 rounded-lg p-2'>
             <LineChartView />
           </div>
-          <div className='graph w-full h-40 bg-red-300'></div>
-          <AddTransactionComponent />
-        </div>
+          <div className='graph w-full h-40 bg-red-300'></div> */}
+        <AddTransactionComponent />
+        {/* </div> */}
+      </div>
+      <div className='graph w-1/2 bg-white border shadow-2xl rounded-lg p-2 m-4'>
+        <LineChartView />
       </div>
 
       {/* <h1>Expense Tracker</h1>

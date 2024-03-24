@@ -1,8 +1,10 @@
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/app';
 import { useState } from 'react';
 import profilePicDummy from '../../assets/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMultiply } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   const [openList, setOpenList] = useState(false);
@@ -34,12 +36,28 @@ const Header = () => {
         <img
           src={profilePicDummy}
           alt='Profile Pic'
-          className='profile w-6 h-6 bg-purple-800'
+          className='profile w-8 h-8 bg-purple-800'
           onClick={handleOpenList}
+          // onMouseEnter={() => setOpenList(true)}
+          // onMouseLeave={() => setOpenList(false)}
         />
         {openList && (
-          <div className='absolute w-40 right-24 border border-red-50 bg-yellow-300'>
-            <button onClick={handleLogout}>Log Out</button>
+          <div className='absolute top-10 w-[200px] right-2 border border-red-50 p-5 flex flex-col gap-3 shadow-lg rounded-xl'>
+            <span
+              className='absolute top-0 right-0 cursor-pointer text-red-400 text-2xl hover:text-red-500 '
+              onClick={() => setOpenList(false)}
+            >
+              <FontAwesomeIcon icon={faMultiply} />
+            </span>
+            <Link to='/accounts' className='hover:font-bold'>
+              Profile
+            </Link>
+            <span
+              onClick={handleLogout}
+              className='cursor-pointer hover:font-bold'
+            >
+              Log Out
+            </span>
           </div>
         )}
       </div>
